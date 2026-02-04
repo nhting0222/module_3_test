@@ -6,6 +6,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from app.core.database import init_db, engine
+# Import models to register them with Base.metadata
+from app.models import FirewallLog, User, AlertRule
 
 
 async def main():
@@ -15,10 +17,10 @@ async def main():
 
     try:
         await init_db()
-        print("✓ Database initialized successfully!")
-        print("✓ All tables created")
+        print("[OK] Database initialized successfully!")
+        print("[OK] All tables created")
     except Exception as e:
-        print(f"✗ Error initializing database: {e}")
+        print(f"[ERROR] Error initializing database: {e}")
         raise
     finally:
         await engine.dispose()

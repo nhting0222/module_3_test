@@ -49,7 +49,7 @@ async def create_users(db: AsyncSession):
         db.add(user)
 
     await db.commit()
-    print(f"✓ Created {len(users)} users")
+    print(f"[OK] Created {len(users)} users")
 
 
 async def create_firewall_logs(db: AsyncSession):
@@ -89,7 +89,7 @@ async def create_firewall_logs(db: AsyncSession):
 
     db.add_all(logs)
     await db.commit()
-    print(f"✓ Created {len(logs)} firewall logs")
+    print(f"[OK] Created {len(logs)} firewall logs")
 
 
 async def create_alert_rules(db: AsyncSession):
@@ -138,7 +138,7 @@ async def create_alert_rules(db: AsyncSession):
         db.add(rule)
 
     await db.commit()
-    print(f"✓ Created {len(rules)} alert rules")
+    print(f"[OK] Created {len(rules)} alert rules")
 
 
 async def main():
@@ -150,13 +150,13 @@ async def main():
             await create_users(db)
             await create_firewall_logs(db)
             await create_alert_rules(db)
-            print("\n✓ Database seeded successfully!")
+            print("\n[OK] Database seeded successfully!")
             print("\nTest Users:")
             print("  - admin / admin123 (ADMIN)")
             print("  - operator / operator123 (OPERATOR)")
             print("  - viewer / viewer123 (VIEWER)")
         except Exception as e:
-            print(f"\n✗ Error seeding database: {e}")
+            print(f"\n[ERROR] Error seeding database: {e}")
             raise
         finally:
             await engine.dispose()
